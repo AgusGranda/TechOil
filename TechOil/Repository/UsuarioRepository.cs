@@ -1,34 +1,45 @@
-﻿using TechOil.Modelos;
+﻿using Microsoft.EntityFrameworkCore;
+using TechOil.DataAccess;
+using TechOil.Modelos;
 
 namespace TechOil.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
     {
+        private readonly MyDbContext _proyectoDb;
 
-        // Agregar base de datos
-        public void AddUsuario(Usuario usuario)
+        public UsuarioRepository(MyDbContext proyectoDb)
         {
-            throw new NotImplementedException();
+            _proyectoDb = proyectoDb;
         }
 
-        public void DeleteUsuario(int id)
+        public async Task<IEnumerable<Usuario>> GetAllUsuarios()
         {
-            throw new NotImplementedException();
+            return await _proyectoDb.Usuarios.ToListAsync();
         }
 
-        public IEnumerable<Usuario> GetAllUsuarios()
+        public async Task<Usuario> GetUsuarioById(int id)
         {
-            throw new NotImplementedException();
+            return await _proyectoDb.Usuarios.FirstOrDefaultAsync(x => x.CodUsuario == id);
         }
 
-        public Usuario GetUsuarioById(int id)
+        public async Task UpdateUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            await _proyectoDb.Usuarios.AddAsync(usuario);
+            await _proyectoDb.SaveChangesAsync();
+        }
+        public async Task AddUsuario(Usuario usuario)
+        {
+            _proyectoDb.Usuarios.Update(usuario);
+            await _proyectoDb.SaveChangesAsync();
         }
 
-        public void UpdateUsuario(Usuario usuario)
+        public async Task DeleteUsuario(int id)
         {
-            throw new NotImplementedException();
+            var usuarioToDelete = _proyectoDb.Usuarios.FirstOrDefaultAsync(x => x.CodUsuario == id);
+            _proyectoDb.Remove(usuarioToDelete);
+            await _proyectoDb.SaveChangesAsync();
         }
+
     }
 }

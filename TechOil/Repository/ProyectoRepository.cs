@@ -1,36 +1,51 @@
-﻿using TechOil.Modelos;
+﻿using System.Net.Sockets;
+using Microsoft.EntityFrameworkCore;
+using TechOil.DataAccess;
+using TechOil.Modelos;
 
 namespace TechOil.Repository
 {
     public class ProyectoRepository : IProyectoRepository
     {
-        
-            // Agregar base de datos
 
+        private readonly MyDbContext _proyectoDb;
 
-        public void AddProyecto(Proyecto proyecto)
+        public ProyectoRepository(MyDbContext proyectoDb)
         {
-            throw new NotImplementedException();
+            _proyectoDb = proyectoDb;
+        }
+       
+
+        public async Task<IEnumerable<Proyecto>> GetAllProyectos()
+        {
+            return await _proyectoDb.Proyectos.ToListAsync();
+
         }
 
-        public void DeleteProyecto(int id)
+        public async Task<Proyecto> GetProyectoById(int id)
         {
-            throw new NotImplementedException();
+            return await _proyectoDb.Proyectos.FirstOrDefaultAsync(x => x.CodProyecto == id);
+        }
+        public async Task AddProyecto(Proyecto proyecto)
+        {
+
+            await _proyectoDb.Proyectos.AddAsync(proyecto);
+            await _proyectoDb.SaveChangesAsync();
         }
 
-        public IEnumerable<Proyecto> GetAllProyectos()
+        public async Task UpdateProyecto(Proyecto proyecto)
         {
-            throw new NotImplementedException();
-        }
+            _proyectoDb.Proyectos.Update(proyecto);
+            await _proyectoDb.SaveChangesAsync();
 
-        public Proyecto GetProyectoById(int id)
-        {
-            throw new NotImplementedException();
         }
+       
 
-        public void UpdateProyecto(Proyecto proyecto)
+        public async Task DeleteProyecto(int id)
         {
-            throw new NotImplementedException();
+            var proyectoToDelete =_proyectoDb.Proyectos.FirstOrDefaultAsync(x => x.CodProyecto == id);
+            _proyectoDb.Remove(proyectoToDelete);
+            await _proyectoDb.SaveChangesAsync();
         }
     }
 }

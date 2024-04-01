@@ -1,35 +1,52 @@
-﻿using TechOil.Modelos;
+﻿using Microsoft.EntityFrameworkCore;
+using TechOil.DataAccess;
+using TechOil.Modelos;
 
 namespace TechOil.Repository
 {
     public class TrabajoRepository : ITrabajoRepository
     {
 
-        // Agregar base de datos
+        private readonly MyDbContext _proyectoDb;
 
-        public void AddTrabajo(Trabajo trabajo)
+        public TrabajoRepository(MyDbContext proyectoDb)
         {
-            throw new NotImplementedException();
+            _proyectoDb = proyectoDb;
         }
 
-        public void DeleteTrabajo(int id)
+
+        public async Task<IEnumerable<Trabajo>> GetAllTrabajos()
+        {
+            return await _proyectoDb.Trabajos.ToListAsync();
+        }
+        public async Task<IEnumerable<Trabajo>> GetTrabajoByEstado(int estado)
         {
             throw new NotImplementedException();
+            // hacer linq para filtrar
+           // return await _proyectoDb.Trabajos.
+        }
+        public async Task<Trabajo> GetTrabajoById(int id)
+        {
+            return await _proyectoDb.Trabajos.FirstOrDefaultAsync(x => x.CodTrabajo == id);
+        }
+        public async Task AddTrabajo(Trabajo trabajo)
+        {
+            await _proyectoDb.Trabajos.AddAsync(trabajo);
+            await _proyectoDb.SaveChangesAsync();
         }
 
-        public IEnumerable<Trabajo> GetAllTrabajos()
+        public async Task UpdateTrabajo(Trabajo trabajo)
         {
-            throw new NotImplementedException();
+            _proyectoDb.Trabajos.Update(trabajo);
+            await _proyectoDb.SaveChangesAsync();
         }
+       
 
-        public Trabajo GetTrabajoById(int id)
+        public async Task DeleteTrabajo(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateTrabajo(Trabajo trabajo)
-        {
-            throw new NotImplementedException();
+            var trabajoToDelete = _proyectoDb.Trabajos.FirstOrDefaultAsync(x => x.CodTrabajo == id);
+            _proyectoDb.Remove(trabajoToDelete);
+            await _proyectoDb.SaveChangesAsync();
         }
     }
 }
