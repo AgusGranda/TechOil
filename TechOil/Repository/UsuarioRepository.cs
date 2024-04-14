@@ -22,17 +22,18 @@ namespace TechOil.Repository
         {
             return await _proyectoDb.Usuarios.FirstOrDefaultAsync(x => x.CodUsuario == id);
         }
-
-        public async Task UpdateUsuario(Usuario usuario)
+         public async Task AddUsuario(Usuario usuario)
         {
+            
             await _proyectoDb.Usuarios.AddAsync(usuario);
             await _proyectoDb.SaveChangesAsync();
         }
-        public async Task AddUsuario(Usuario usuario)
+        public async Task UpdateUsuario(Usuario usuario)
         {
             _proyectoDb.Usuarios.Update(usuario);
             await _proyectoDb.SaveChangesAsync();
         }
+       
 
         public async Task DeleteUsuario(int id)
         {
@@ -41,5 +42,10 @@ namespace TechOil.Repository
             await _proyectoDb.SaveChangesAsync();
         }
 
+        public async Task <Usuario> LoginUsuario(string nombre, string contraseña)
+        {
+            var usuario = await _proyectoDb.Usuarios.FirstOrDefaultAsync(n => n.Nombre == nombre && n.Contraseña == contraseña);
+            return usuario;
+        }
     }
 }

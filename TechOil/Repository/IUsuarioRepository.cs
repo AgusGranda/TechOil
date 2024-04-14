@@ -1,4 +1,6 @@
-﻿namespace TechOil.Modelos
+﻿using TechOil.Modelos;
+
+namespace TechOil.Repository
 {
     public interface IUsuarioRepository
     {
@@ -7,5 +9,6 @@
         Task AddUsuario(Usuario usuario);
         Task UpdateUsuario(Usuario usuario);
         Task DeleteUsuario(int id);
+        Task <Usuario> LoginUsuario(string nombre, string contraseña);
     }
 }

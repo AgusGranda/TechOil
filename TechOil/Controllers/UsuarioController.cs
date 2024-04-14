@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechOil.Modelos;
+using TechOil.Models.DTO_s;
+using TechOil.Repository;
 
 namespace TechOil.Controllers
 {
@@ -18,7 +20,13 @@ namespace TechOil.Controllers
         public async Task<IActionResult> Get()
         {
             var usuarios = await _usuarioRepository.GetAllUsuarios();
-            return Ok(usuarios);
+
+            var usuariosDTO = usuarios.Select(usuarios => new UsuarioDTO
+            {
+                Nombre = usuarios.Nombre
+            }).ToList();
+
+            return Ok(usuariosDTO);
         }
 
         [HttpGet("{id}")]
@@ -31,9 +39,17 @@ namespace TechOil.Controllers
             }
             return NotFound();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Post(Usuario usuario)
+        public async Task<IActionResult> Post(UsuarioDTO usuarioDto)
         {
+            Usuario usuario = new Usuario
+            {
+                Nombre = usuarioDto.Nombre,
+                Dni = usuarioDto.Dni,
+                Tipo = 0
+            };
+
             await _usuarioRepository.AddUsuario(usuario);
             return CreatedAtAction(nameof(usuario), new { id = usuario.CodUsuario }, usuario);
         }

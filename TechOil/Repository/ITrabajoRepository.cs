@@ -1,4 +1,6 @@
-﻿namespace TechOil.Modelos
+﻿using TechOil.Modelos;
+
+namespace TechOil.Repository
 {
     public interface ITrabajoRepository
     {
