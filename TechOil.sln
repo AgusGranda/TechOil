@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechOil", "TechOil\TechOil.csproj", "{789F5E0D-45B5-4AE9-A27F-FB4C5E65B53D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechOil", "TechOil\TechOil.csproj", "{789F5E0D-45B5-4AE9-A27F-FB4C5E65B53D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTechOil", "TestProject1\TestTechOil.csproj", "{87DE17BD-AA11-4E83-9E51-70F8722DECBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{789F5E0D-45B5-4AE9-A27F-FB4C5E65B53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{789F5E0D-45B5-4AE9-A27F-FB4C5E65B53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{789F5E0D-45B5-4AE9-A27F-FB4C5E65B53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DE17BD-AA11-4E83-9E51-70F8722DECBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DE17BD-AA11-4E83-9E51-70F8722DECBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DE17BD-AA11-4E83-9E51-70F8722DECBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DE17BD-AA11-4E83-9E51-70F8722DECBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

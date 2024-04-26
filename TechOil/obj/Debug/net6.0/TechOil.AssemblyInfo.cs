@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechOil")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b7b208e35cbb4b6f8583e8d7e8498b67e53176a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d9c31160ce443f095602b8f6c522dcd1df18764")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechOil")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechOil")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

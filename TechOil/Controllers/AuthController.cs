@@ -28,7 +28,6 @@ namespace TechOil.Controllers
             IActionResult response = Unauthorized();
             if (login != null)
             {
-                //if (login.Nombre.Equals(login.Nombre) && login.Contraseña.Equals(login.Contraseña))
                 var usuario = await _usuarioRepository.LoginUsuario(login.Nombre, login.Contraseña);
                 if (usuario != null)
                 {
@@ -41,8 +40,8 @@ namespace TechOil.Controllers
 
                     var subject = new ClaimsIdentity(new[]
                     {
-                        new Claim(JwtRegisteredClaimNames.Sub, usuario.CodUsuario.ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, usuario.Nombre)
+                        new Claim(JwtRegisteredClaimNames.NameId, usuario.CodUsuario.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Name, usuario.Nombre)
                     });
 
                     var expires = DateTime.UtcNow.AddMinutes(10);

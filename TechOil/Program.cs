@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "SDL API", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "SDL API", Version = "v1" });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -67,8 +67,6 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
     .AddEnvironmentVariables();
 
 
-
-builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Services.AddDbContext<MyDbContext>();

@@ -16,6 +16,7 @@ namespace TechOil.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             var servicio = await _servicioRepository.GetAllServicios();

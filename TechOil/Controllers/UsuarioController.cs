@@ -21,12 +21,8 @@ namespace TechOil.Controllers
         {
             var usuarios = await _usuarioRepository.GetAllUsuarios();
 
-            var usuariosDTO = usuarios.Select(usuarios => new UsuarioDTO
-            {
-                Nombre = usuarios.Nombre
-            }).ToList();
 
-            return Ok(usuariosDTO);
+            return Ok(usuarios);
         }
 
         [HttpGet("{id}")]
